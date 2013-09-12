@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Chaine FM</title>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href="css/custom.css" rel="stylesheet">
+    
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="."><img src="img/icon25px.png"> <span class="red active">Chaine</span> FM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="contact" target="otherFrame"><i class="icon-comments"></i> Contact</a></li>
+            <li><a href="schedule" target="otherFrame"><i class="icon-calendar"></i> Schedule</a></li>
+            <li><a href="about" target="otherFrame"><i class="icon-question-sign"></i> About</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    
+    
+
+    <div class="container">
+    <div class="alert alert-dismissable alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <p>This app may use up to 1MB/minute while playing</p>
+            <p>Chaine FM does not accept any responsibility for data charges incurred in using this app</p>
+          </div>
+      <div class="row">
+        <div class="col-sm-12 col-xs-12">
+                
+          <h1>Click Play to Start</h1>
+          </br>
+          <audio  controls id="radio">
+            <source src="http://174.137.50.51:16504/;">
+            <p>Your browser does not support the audio element. Please consider updating to a newer browser.</p>
+          </audio>
+          <p id ="one"></p>
+          <p id ="two"></p>
+        </div>
+      </div>
+    </div><!-- /.container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/hover.js"></script>
+    <!-- <script src="js/ga.js"></script> -->
+
+	</body>
+</html>

@@ -1,0 +1,36 @@
+.red {
+  color: #ff0000;
+}
+
+body {
+  margin-top: 100px;
+}
+
+h1, p {
+  font-family: 'Roboto', sans-serif;
+}
+
+.about {
+  font-size: larger;
+}
+
+.col-sm-12, .col-xs-12 {
+  text-align: center;
+}
+
+th {
+  text-align: center;
+}
+
+body {
+  background-color: #e6e9ed;
+}
+
+.navbar-nav>li>a {
+  padding-bottom: 20px;
+}
+
+#aboutLink {
+  text-decoration: none; 
+  color: #333;
+}
