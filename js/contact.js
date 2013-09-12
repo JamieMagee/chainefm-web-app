@@ -30,7 +30,9 @@ $(document).ready(function () {
 			i = 0;
 			window.open("https://facebook.com/chainefm");
 		} else {
-			alert('Facebook does not all direct posting to a wall\r\nPlease copy to clipboard and click again to open Facebook')
+			alert('Facebook does not all direct posting to a wall\r\nPlease copy to clipboard and click again to open Facebook');
+			$('#message').focus();
+			$('#message').select();
 		}
 	});
 
