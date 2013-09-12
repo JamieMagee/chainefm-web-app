@@ -1,39 +1,43 @@
 $(document).ready(function () {
 
 	var i = 0;
+	
+	$('#facebook').popover()
+	$('#message').focus();
 
 	$("#sms").click(function () {
 		var uri = "sms:80818?body=CFM ";
-		uri += $('#message').val();
-		$('#message').val('');
-		window.open(uri);
+		cleanUp(uri);
 	});
 
 	$("#email").click(function () {
 		var uri = "mailto:studio@chainefm.com?body=";
-		uri += $('#message').val();
-		$('#message').val('');
-		window.open(uri);
+		cleanUp(uri);
 	});
 
 	$("#twitter").click(function () {
 		var uri = "https://twitter.com/intent/tweet?text=@ChaineFM "
-		uri += $('#message').val();
-		$('#message').val('');
-		window.open(uri);
+		cleanUp(uri);		
 	});
 
 	$("#facebook").click(function () {
-		i++;
-		if (i == 2) {
+		if (i != 0) {
+			$('#facebook').popover()
 			$('#message').val('');
 			i = 0;
 			window.open("https://facebook.com/chainefm");
 		} else {
-			alert('Facebook does not all direct posting to a wall\r\nPlease copy to clipboard and click again to open Facebook');
-			$('#message').focus();
+			$('#facebook').popover()
 			$('#message').select();
+			i++;
 		}
 	});
-
+	
 });
+
+function cleanUp(uri) {
+	uri += $('#message').val();
+	$('#message').val('');
+	$('#message').focus();
+	window.open(uri);
+}
