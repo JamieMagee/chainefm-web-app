@@ -6,8 +6,9 @@ body {
   margin-top: 100px;
 }
 
-h1, p {
+h1, h2, h3, h4, p, li, td {
   font-family: 'Roboto', sans-serif;
+  -webkit-text-stroke: .01em #333;
 }
 
 .about {
@@ -30,7 +31,7 @@ body {
   padding-bottom: 20px;
 }
 
-#aboutLink {
+.no-highlight {
   text-decoration: none; 
   color: #333;
 }
