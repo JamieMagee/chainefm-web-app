@@ -8,7 +8,6 @@ body {
 
 h1, h2, h3, h4, p, li, td {
   font-family: 'Roboto', sans-serif;
-  -webkit-text-stroke: .01em #333;
 }
 
 .about {
