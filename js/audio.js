@@ -3,8 +3,10 @@ $(document).ready(function () {
 	$('#radio').click(function () {
 		if (this.paused == false) {
 			$('h1').text('Click Play to Start');
+			$('title').text($('title').html().substring(2, $('title').html().length));
 		} else {
 			$('h1').text('Now Playing');
+			$('title').prepend('▶ ');
 		}
 	});
 
