@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 	$('#radio').click(function () {
 		if (this.paused == false) {
-			$('h1').text('Click Play to Start');
+			$('h1').text('Press Play to Start');
 			$('title').text($('title').html().substring(2, $('title').html().length));
 		} else {
 			$('h1').text('Now Playing');
