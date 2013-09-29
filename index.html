@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="A mobile web app for listening to Chaine FM on the go!">
+    <meta name="author" content="Jamie Magee">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="HandheldFriendly" content="true">
 
     <title>Chaine FM</title>
 
@@ -27,6 +30,15 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
     <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png">
+    
+    <!-- Prompt iOS users to add web app to homescreen -->
+    <link rel="stylesheet" href="css/add2home.css">
+    <script type="text/javascript">
+      var addToHomeConfig = {
+        touchIcon:true,
+      };
+    </script>
+    <script type="application/javascript" src="js/add2home.js"></script>
     
   </head>
 
@@ -71,7 +83,7 @@
         <p id ="one"></p>
         <p id ="two"></p>
         <br>
-        <h3 id="inline">Share</h3> <a class="no-highlight" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); return false;"><i class="icon-facebook-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('http://plus.google.com/share?url='+encodeURIComponent(location.href)); return false;"><i class="icon-google-plus-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)); return false;"><i class="icon-twitter-sign icon-2x"></i> <a class="no-highlight" onclick="window.open('mailto:?subject=Chaine FM Web App&body='+encodeURIComponent(location.href)); return false;"><i class="icon-envelope icon-2x"></i></a> <a class="no-highlight" onclick="window.open('sms:?body='+encodeURIComponent(location.href)); return false;"><i class="icon-comment icon-2x"></i></a>
+        <h3 id="inline">Share</h3> <a class="no-highlight" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); return false;"><i class="icon-facebook-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('http://plus.google.com/share?url='+encodeURIComponent(location.href)); return false;"><i class="icon-google-plus-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)); return false;"><i class="icon-twitter-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('mailto:?subject=Chaine FM Web App&body='+encodeURIComponent(location.href)); return false;"><i class="icon-envelope icon-2x"></i></a> <a class="no-highlight" onclick="window.open('sms:?body='+encodeURIComponent(location.href)); return false;"><i class="icon-comment icon-2x"></i></a>
       </div>
     </div>
   </div>
