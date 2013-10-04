@@ -3,7 +3,7 @@ $(document).ready(function () {
 	$('#radio').click(function () {
 		if (this.paused == false) {
 			$('h1').text('Press Play');
-			$('title').text($('title').html().substring(2, $('title').html().length));
+			$('title').text($('title').html().substring($('title').html().indexOf('▶ ')+2, $('title').html().length));
 		} else {
 			$('h1').text('Now Playing');
 			$('title').prepend('▶ ');
