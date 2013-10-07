@@ -47,3 +47,7 @@ body {
   text-align: right;
   margin-bottom: 0px;
 }
+
+.panel-body {
+  text-align: left;
+}
