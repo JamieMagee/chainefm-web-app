@@ -3,7 +3,9 @@ $(document).ready(function () {
 	$('#radio').click(function () {
 		if (this.paused == false) {
 			$('h1').text('Press Play');
-			$('title').text($('title').html().substring($('title').html().indexOf('▶ ')+2, $('title').html().length));
+			if ($('title').html().indexOf('▶ ') != -1) {
+				$('title').text($('title').html().substring(2, $('title').html().length));
+			}		
 		} else {
 			$('h1').text('Now Playing');
 			$('title').prepend('▶ ');
@@ -38,14 +40,15 @@ function getOnAir() {
 
 		for (var i = 0; i <= trimmedTimes.length; i++) {
 			if (curHour < trimmedTimes[i]) {
-				$('#one').text('On air: ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(1).text());
-				$('#one').append(' (' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
-				$('#two').text('with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text());
+				$('.panel-title').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')' + " ", data).find("td").eq(1).text());
+				$('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
+				$('.panel-title').append(' with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text());
+				$('.panel-body').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(3).text());
 				break;
 			} else if (i == trimmedTimes.length) {
-				$('#one').text('On air: ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(1).text());
-				$('#one').append(' (' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
-				$('#two').text('with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text());
+				//$('#one').text('On air: ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(1).text());
+				//$('#one').append(' (' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
+				//$('#two').text('with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text());
 			}
 		}
 	});

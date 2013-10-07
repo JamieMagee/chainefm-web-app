@@ -38,3 +38,12 @@ body {
 #inline {
   display: inline;
 }
+
+.hide {
+  visibility: hidden;
+}
+
+.align-right {
+  text-align: right;
+  margin-bottom: 0px;
+}
