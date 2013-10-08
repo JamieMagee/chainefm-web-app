@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css">
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 	
@@ -94,7 +95,10 @@
           </tr>
         </table>
         <br>
-        <audio controls id="radio">
+        <i id="playpause" class="icon-spinner icon-spin icon-2x"></i>
+        <div id="volume"></div>
+        <i id="volume-icon" class="icon-volume-up icon-2x"></i>
+        <audio id="radio">
           <source src="http://stream-tx1.radioparadise.com:80/mp3-192" type="audio/mpeg">
           <source src="http://stream-tx1.radioparadise.com:80/ogg-192" type="audio/ogg">
           <p>Your browser does not support the audio element. Please consider updating to a newer browser.</p>
@@ -118,6 +122,8 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/hover.js"></script>
     <script src="js/ga.js"></script>

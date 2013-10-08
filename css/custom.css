@@ -65,3 +65,21 @@ body {
 .no-border {
   border-top: none !important;
 }
+
+#volume {
+  display: inline-block;
+  width: 60%;
+  vertical-align: middle;
+}
+
+#playpause, #volume-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50px
+}
+
+.slider-tip {
+    opacity:1;
+    bottom:120%;
+    margin-left: -1.36em;
+}
