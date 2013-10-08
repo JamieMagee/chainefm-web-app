@@ -1,6 +1,5 @@
 <?php 
 
-
 require('config.php');
 $stream = getStreamInfo();
 if($stream['info']['status'] == 'OFF AIR'){
@@ -237,7 +236,7 @@ function array_decode($array){
 
 function cacheVar($stream){
 	$stream = array_encode($stream);
-	file_put_contents('info.json', json_encode($stream));
+	file_put_contents('info.json', json_encode($stream, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
 }
 
 function cacheHistory($stream){

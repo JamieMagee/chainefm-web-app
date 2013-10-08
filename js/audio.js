@@ -24,7 +24,7 @@ $(document).ready(function () {
   $('#volume').draggable();
 
   $('#playpause').click(function () {
-    if (!$('#playpause').hasClass('icon-spinner')) {
+    if (!$('#playpause').hasClass('icon-refresh')) {
       if ($('#radio')[0].paused == false) {
         $('#playpause').removeClass('icon-pause').addClass('icon-play');
         $('#radio')[0].pause();
@@ -53,15 +53,12 @@ $(document).ready(function () {
   });
   
   $("#radio").on("canplaythrough", function(){
-    console.log('canplaythrough');
     $('#playpause').attr( "class", "icon-play icon-2x");
   });
   
   $("#radio").on("stalled", function(){
-    $('#playpause').attr( "class", "icon-spinner icon-spin icon-2x");
+    $('#playpause').attr( "class", "icon-refresh icon-spin icon-2x");
   });
-  
-  
   
   getOnAir();
   getStats();
@@ -97,13 +94,13 @@ function getOnAir() {
     for (var i = 0; i <= trimmedTimes.length; i++) {
       if (curHour < trimmedTimes[i]) {
         $('.panel-title').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')' + " ", data).find("td").eq(1).text());
-        $('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
+        //$('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
         $('.panel-title').append(' <small>with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text() + '</small>');
         $('.panel-body').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(3).text());
         break;
       } else if (i == trimmedTimes.length) {
         $('.panel-title').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')' + " ", data).find("td").eq(1).text());
-        $('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
+        //$('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
         $('.panel-title').append(' <small>with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text() + '</small>');
         $('.panel-body').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(3).text());
       }
