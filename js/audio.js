@@ -9,14 +9,17 @@ $(document).ready(function () {
     slide : function(){
       var value = $('#volume').slider('value');
       $('#radio')[0].volume = (value / 100);
-      if (value >= 50) {
-        $('#volume-icon').attr( "class", "icon-volume-up icon-2x" )
+      if (value >= 75) {
+        $('#volume-icon').html('<i class="icon-volume-up icon-2x"></i>')
       }
-      else if (value > 1 && value < 50) {
-        $('#volume-icon').attr( "class", "icon-volume-down icon-2x" )
+      else if (value >= 25 && value < 75) {
+        $('#volume-icon').html('<i class="icon-volume-down icon-2x"></i>')
+      }
+      else if (value > 1 && value < 25) {
+        $('#volume-icon').html('<i class="icon-volume-off icon-2x"></i>')
       }
       else {
-        $('#volume-icon').attr( "class", "icon-volume-off icon-2x" )
+        $('#volume-icon').html('<span class="icon-stack"><i class="icon-volume-off icon-stack-base"></i><i class="icon-ban-circle icon-stack-base text-error"></i></span>')
       }
     }
   });
@@ -43,12 +46,12 @@ $(document).ready(function () {
     if ($('#radio')[0].volume != 0) {
       $('#radio')[0].volume = 0;
       $('#volume').slider('value', 0);
-      $('#volume-icon').attr( "class", "icon-volume-off icon-2x");
+      $('#volume-icon').html('<span class="icon-stack"><i class="icon-volume-off icon-stack-base"></i><i class="icon-ban-circle icon-stack-base text-error"></i></span>')
     }
     else {
       $('#radio')[0].volume = .8;
       $('#volume').slider('value', 80);
-      $('#volume-icon').attr( "class", "icon-volume-up icon-2x");
+      $('#volume-icon').html('<i class="icon-volume-up icon-2x"></i>')
     }
   });
   

@@ -114,3 +114,7 @@ body {
 small {
   font-size: smaller!important;
 }
+
+.text-error {
+color: #9d261d;
+}
