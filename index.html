@@ -69,25 +69,41 @@
     </nav>    
 
     <div class="container">
-    <div class="alert alert-dismissable alert-danger">
+    <!--<div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <p><i class="icon-warning-sign"></i> This app may use up to 1MB/minute while playing</p>
       <p>Chaine FM does not accept any responsibility for data charges incurred in using this app</p>
-    </div>
+    </div>-->
     <div class="row">
-      <div class="col-sm-12 col-xs-12">      
-        <h1>Press Play</h1>
+      <div class="col-sm-12 col-xs-12">
+        <table class="table">
+          <tr>
+            <td class="no-border" rowspan="3">
+              <img height="100px" width="100px" class="albumart">
+            </td>
+            <td class="no-border"><strong>Track</strong></td>
+            <td class="no-border track"></td>
+          </tr>
+          <tr>
+            <td><strong>Artist</strong></td>
+            <td class="artist"></td>
+          </tr>
+          <tr>
+            <td><strong>Album</strong></td>
+            <td class="album"></td>
+          </tr>
+        </table>
         <br>
         <audio controls id="radio">
-          <source src="//mp3.ai-radio.org/;" type="audio/mpeg">
-          <source src="//ogg.ai-radio.org/;" type="audio/ogg">
+          <source src="http://stream-tx1.radioparadise.com:80/mp3-192" type="audio/mpeg">
+          <source src="http://stream-tx1.radioparadise.com:80/ogg-192" type="audio/ogg">
           <p>Your browser does not support the audio element. Please consider updating to a newer browser.</p>
         </audio>
         <br><br>
         
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title pull-left clearfix"></h3>
+            <h3 class="panel-title left-title"></h3>
             <p class="align-right"></p>
           </div>
           <div class="panel-body">

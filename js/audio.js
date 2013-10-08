@@ -2,17 +2,20 @@ $(document).ready(function () {
 
 	$('#radio').click(function () {
 		if (this.paused == false) {
-			$('h1').text('Press Play');
 			if ($('title').html().indexOf('▶ ') != -1) {
 				$('title').text($('title').html().substring(2, $('title').html().length));
 			}		
 		} else {
-			$('h1').text('Now Playing');
 			$('title').prepend('▶ ');
 		}
 	});
 
 	getOnAir();
+	getStats();
+	
+	window.setInterval(function () {
+		getStats();
+	}, 10000);
 
 	window.setInterval(function () {
 		getOnAir();
@@ -42,14 +45,29 @@ function getOnAir() {
 			if (curHour < trimmedTimes[i]) {
 				$('.panel-title').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')' + " ", data).find("td").eq(1).text());
 				$('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
-				$('.panel-title').append(' with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text());
+				$('.panel-title').append(' <small>with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text() + '</small>');
 				$('.panel-body').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(3).text());
 				break;
 			} else if (i == trimmedTimes.length) {
-				//$('#one').text('On air: ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(1).text());
-				//$('#one').append(' (' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
-				//$('#two').text('with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text());
+				$('.panel-title').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')' + " ", data).find("td").eq(1).text());
+				$('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
+				$('.panel-title').append(' <small>with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text() + '</small>');
+				$('.panel-body').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(3).text());
 			}
 		}
+	});
+}
+
+function getStats() {
+	$.ajax({
+		timeout: 10000,
+		url: "icecast-stats/icecast.php"
+	});
+
+	$.getJSON("icecast-stats/info.json", function( data ) {
+	  $('.albumart').attr('src',atob(data['album'].image_m));
+	  $('.track').text(atob(data['info'].song));
+	  $('.artist').text(atob(data['info'].artist));
+	  $('.album').text(atob(data['album'].title));
 	});
 }

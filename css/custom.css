@@ -3,7 +3,7 @@
 }
 
 body {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 h1, h2, h3, h4, p, li, td {
@@ -48,6 +48,20 @@ body {
   margin-bottom: 0px;
 }
 
+.left-title {
+  font-weight: bold;
+  text-align: left;
+  float: left;
+}
+
 .panel-body {
   text-align: left;
+}
+
+.albumart {
+  background: url(/img/default.jpg);
+}
+
+.no-border {
+  border-top: none !important;
 }
