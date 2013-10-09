@@ -43,7 +43,7 @@ $(document).ready(function () {
   });
   
   $('#volume-icon').click(function () {
-    if ($('#radio')[0].volume != 0) {
+    if ($('#radio')[0].volume > .01) {
       $('#radio')[0].volume = 0;
       $('#volume').slider('value', 0);
       $('#volume-icon').html('<span class="icon-stack"><i class="icon-volume-off icon-stack-base"></i><i class="icon-ban-circle icon-stack-base text-error"></i></span>')
@@ -60,7 +60,11 @@ $(document).ready(function () {
   });
   
   $("#radio").on("stalled", function(){
+    console.log("stalled");
     $('#playpause').attr( "class", "icon-refresh icon-spin icon-2x");
+    if ($('title').html().indexOf('▶ ') != -1) {
+      $('title').text($('title').html().substring(2, $('title').html().length));
+    } 
   });
   
   getOnAir();
@@ -119,7 +123,7 @@ function getStats() {
 
   $.getJSON("icecast-stats/info.json", function( data ) {
     $('.albumart').attr('src',atob(data['album'].image_m));
-    $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a>');
+    $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a> <a href="'+atob(data['track'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
     $('.artist').html('<a target="_blank" href="'+atob(data['artist'].lastfm_url)+'">'+atob(data['info'].artist));
     if (atob(data['album'].title) != 'Not found') {
       $('.album').html('<a target="_blank" href="'+atob(data['album'].lastfm_url)+'">'+atob(data['album'].title));
