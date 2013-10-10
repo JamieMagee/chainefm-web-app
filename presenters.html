@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
-    <script src="js/mailto.js"></script>
 	
     <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="img/apple-touch-icon-152x152-precomposed.png">
@@ -55,13 +54,12 @@
           <a class="navbar-brand" href="."><img src="img/icon25px.png" alt="Chaine FM logo"> <span class="red">Chaine</span> FM</a>
         </div>
 
-        
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="contact"><i class="icon-comments"></i> Contact</a></li>
-            <li><a href="schedule"><i class="icon-calendar"></i> Schedule</a></li>
-            <li><a href="presenters" target="otherFrame"><i class="icon-user"></i> Presenters</a></li>
-            <li class="active"><a href="#"><i class="icon-question-sign"></i> About</a></li>
+            <li><a href="contact"><i class="icon-comments" target="_blank"></i> Contact</a></li>
+            <li><a href="schedule"><i class="icon-calendar" target="_blank"></i> Schedule</a></li>
+            <li class="active"><a href="#" target="otherFrame"><i class="icon-user"></i> Presenters</a></li>
+            <li><a href="about"><i class="icon-question-sign" target="_blank"></i> About</a></li>
           </ul>
         </div>
       </div>
@@ -69,23 +67,22 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-xs-12"> 
-          <div class="about">
-          <a href="//www.chainefm.com" class="no-highlight"><h1><span class="red">Chaine</span> FM</h1>
-          <h2>It's All About Larne</h2></a>
-          <p>App by <a href="//jamiemagee.co.uk">Jamie Magee</a>
-          <p><a href="//github.com/JamieMagee/chainefm-web-app"><i class="icon-github icon-large no-highlight"></i> View Source on GitHub</a></p>
-          <script>mail2("jamie.magee","gmail",0,'?subject=Bug%20Report" class="btn btn-default',"Report Bug")</script> <script>mail2("jamie.magee","gmail",0,'?subject=Feature%20Request" class="btn btn-default',"Request Feature")</script>
-          <br><br><br>
-          <h3 id="inline">Share</h3> <a class="no-highlight" onclick="window.open('//www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); return false;"><i class="icon-facebook-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('//plus.google.com/share?url='+encodeURIComponent(location.href)); return false;"><i class="icon-google-plus-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('//twitter.com/intent/tweet?url='+encodeURIComponent(location.href)); return false;"><i class="icon-twitter-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('mailto:?subject=Chaine FM Web App&amp;body='+encodeURIComponent(location.href)); return false;"><i class="icon-envelope icon-2x"></i></a> <a class="no-highlight" onclick="window.open('sms:?body='+encodeURIComponent(location.href)); return false;"><i class="icon-comment icon-2x"></i></a>
+        <div class="col-sm-12 col-xs-12">      
+			
+          <div class="panel-group" id="accordion">
+
           </div>
+
+          <br>
+          <h3 id="inline">Share</h3> <a class="no-highlight" onclick="window.open('//www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); return false;"><i class="icon-facebook-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('//plus.google.com/share?url='+encodeURIComponent(location.href)); return false;"><i class="icon-google-plus-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('//twitter.com/intent/tweet?url='+encodeURIComponent(location.href)); return false;"><i class="icon-twitter-sign icon-2x"></i></a> <a class="no-highlight" onclick="window.open('mailto:?subject=Chaine FM Web App&amp;body='+encodeURIComponent(location.href)); return false;"><i class="icon-envelope icon-2x"></i></a> <a class="no-highlight" onclick="window.open('sms:?body='+encodeURIComponent(location.href)); return false;"><i class="icon-comment icon-2x"></i></a>
         </div>
       </div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="js/presenter.js"></script>
     <script src="js/hover.js"></script>
-    <script src="js/ga.js"></script>    
+    <script src="js/ga.js"></script>
   </body>
 </html>

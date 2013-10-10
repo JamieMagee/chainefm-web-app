@@ -122,3 +122,16 @@ small {
 .panel-footer {
   text-align: left;
 }
+
+.media-object {
+  width: 100px;
+  height: auto;
+}
+
+.media-body {
+  text-align: left;
+}
+
+.media-body>h4 {
+  text-align: center;
+}
