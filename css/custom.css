@@ -54,7 +54,7 @@ body {
   #float: left;
 }
 
-.panel-body {
+.show-info {
   text-align: left;
 }
 
@@ -116,5 +116,9 @@ small {
 }
 
 .text-error {
-color: #9d261d;
+  color: #9d261d;
+}
+
+.panel-footer {
+  text-align: left;
 }

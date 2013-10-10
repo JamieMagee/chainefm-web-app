@@ -1,5 +1,4 @@
 <?php
-
 //error_reporting(0);
 define(SERVER, 'http://stream-tx4.radioparadise.com');//your icecast server address, without the ending "/"
 define(MOUNT, '/mp3-192'); //your radio's mount point, with the leading "/"
@@ -12,3 +11,4 @@ define(GET_TRACK_BUY_LINK, true); //get buy links on Amazon, iTunes and 7digital
 define(GET_LYRICS, false); //get lyrics of the current song using chartlyrics.com's API
 define(CACHE_ALBUM_ART, false);//cache album art images to local server
 define(RECORD_HISTORY, false);//record play history of your radio
+?>
