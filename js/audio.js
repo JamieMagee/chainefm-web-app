@@ -60,7 +60,6 @@ $(document).ready(function () {
   });
   
   $("#radio").on("stalled", function(){
-    console.log("stalled");
     $('#playpause').attr( "class", "icon-refresh icon-spin icon-2x");
     if ($('title').html().indexOf('▶ ') != -1) {
       $('title').text($('title').html().substring(2, $('title').html().length));

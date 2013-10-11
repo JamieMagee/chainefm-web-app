@@ -2,32 +2,32 @@ $(document).ready(function () {
 
 	var i = 0;
 	
-	$('#facebook').popover()
-	$('#message').focus();
+	$('#facebook-btn').popover()
+	$('#message-btn').focus();
 
-	$("#sms").click(function () {
+	$("#sms-btn").click(function () {
 		var uri = "sms:80818?body=CFM ";
 		cleanUp(uri);
 	});
 
-	$("#email").click(function () {
+	$("#email-btn").click(function () {
 		var uri = "mailto:studio@chainefm.com?body=";
 		cleanUp(uri);
 	});
 
-	$("#twitter").click(function () {
+	$("#twitter-btn").click(function () {
 		var uri = "https://twitter.com/intent/tweet?text=@ChaineFM "
 		cleanUp(uri);		
 	});
 
-	$("#facebook").click(function () {
+	$("#facebook-btn").click(function () {
 		if (i != 0) {
-			$('#facebook').popover()
+			$('#facebook-btn').popover()
 			$('#message').val('');
 			i = 0;
 			window.open("https://facebook.com/chainefm");
 		} else {
-			$('#facebook').popover()
+			$('#facebook-btn').popover()
 			$('#message').select();
 			i++;
 		}

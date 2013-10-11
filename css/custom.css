@@ -1,7 +1,3 @@
-.red {
-  color: #ff0000;
-}
-
 body {
   margin-top: 80px;
 }
@@ -134,4 +130,34 @@ small {
 
 .media-body>h4 {
   text-align: center;
+}
+
+#google-plus > a:hover {
+  background-color: #D34836;
+  background-image: none;
+  filter: none;
+}
+
+#facebook > a:hover {
+  background-color: #6D8BC9;
+  background-image: none;
+  filter: none;
+}
+
+#twitter > a:hover {
+  background-color: #00aced;
+  background-image: none;
+  filter: none;
+}
+
+#email > a:hover {
+  background-color: #ebc755;
+  background-image: none;
+  filter: none;
+}
+
+#sms > a:hover {
+  background-color: #89b72d;
+  background-image: none;
+  filter: none;
 }
