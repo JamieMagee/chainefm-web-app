@@ -124,6 +124,7 @@ function getStats() {
 
   $.getJSON("icecast-stats/info.json", function( data ) {
     $('.albumart').attr('src',atob(data['album'].image_m));
+    $('#albumart-link').attr('href',atob(data['album'].image_xl));
     $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a> <a href="'+atob(data['track'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
     $('.artist').html('<a target="_blank" href="'+atob(data['artist'].lastfm_url)+'">'+atob(data['info'].artist));
     if (atob(data['album'].title) != 'Not found') {
