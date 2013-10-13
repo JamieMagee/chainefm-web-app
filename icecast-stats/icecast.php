@@ -127,7 +127,7 @@ function getArtistInfo($stream){
 
 //get buylink	
 function getTrackBuyLink($stream){
-	$url = 'http://ws.audioscrobbler.com/2.0/?method=track.getbuylinks&artist='.urlencode($stream['info']['artist']).'&track='.urlencode($stream['info']['song']).'&api_key='.LAST_FM_API.'&country='.urlencode('united states').'&autocorrect=1';
+	$url = 'http://ws.audioscrobbler.com/2.0/?method=track.getbuylinks&artist='.urlencode($stream['info']['artist']).'&track='.urlencode($stream['info']['song']).'&api_key='.LAST_FM_API.'&country='.urlencode('GB').'&autocorrect=1';
 	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
@@ -153,6 +153,38 @@ function getTrackBuyLink($stream){
 				$new = array('link' => $buy['buyLink'],'icon'=>$buy['supplierIcon']);
 			}
 			$stream['track']['buylink']['download'][$supplier] = $new;
+		}
+	}
+	return $stream;
+}
+
+function getAlbumBuyLink($stream){
+	$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getbuylinks&artist='.urlencode($stream['info']['artist']).'&album='.urlencode($stream['album']['title']).'&api_key='.LAST_FM_API.'&country='.urlencode('GB').'&autocorrect=1';
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = obj_to_array($xml);
+//	print_r($xml);
+	if($xml['affiliations']['physicals']['affiliation']){
+		foreach($xml['affiliations']['physicals']['affiliation'] as $buy){
+			$supplier = str_replace('iTuens', 'iTunes', $buy['supplierName']);
+			if($buy['isSearch'] == 0){
+				$new = array('link' => $buy['buyLink'], 'price'=>$buy['price']['amount'], 'currency'=>$buy['price']['currency'], 'icon'=>$buy['supplierIcon']);
+			}
+			else{
+				$new = array('link' => $buy['buyLink'],'icon'=>$buy['supplierIcon']);
+			}
+			$stream['album']['buylink']['physical'][$supplier] = $new;
+		}
+	}
+	if($xml['affiliations']['downloads']['affiliation']){
+		foreach($xml['affiliations']['downloads']['affiliation'] as $buy){
+			$supplier = str_replace('Amazon MP3', 'Amazon', $buy['supplierName']);
+			if($buy['isSearch'] == 0){
+				$new = array('link' => $buy['buyLink'], 'price'=>$buy['price']['amount'], 'currency'=>$buy['price']['currency'], 'icon'=>$buy['supplierIcon']);
+			}
+			else{
+				$new = array('link' => $buy['buyLink'],'icon'=>$buy['supplierIcon']);
+			}
+			$stream['album']['buylink']['download'][$supplier] = $new;
 		}
 	}
 	return $stream;
@@ -199,6 +231,9 @@ function getInfo($stream){
 	}
 	if(GET_TRACK_BUY_LINK == TRUE){
 		$stream = getTrackBuyLink($stream);
+	}
+	if(GET_ALBUM_BUY_LINK == TRUE && isset($stream['album']['title'])){
+		$stream = getAlbumBuyLink($stream);
 	}
 	if(CACHE_ALBUM_ART == TRUE){
 		$stream['album']['local_image'] = cacheAlbumArt($stream['album']['image_l']);

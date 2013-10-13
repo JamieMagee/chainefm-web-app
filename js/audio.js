@@ -126,9 +126,9 @@ function getStats() {
     $('.albumart').attr('src',atob(data['album'].image_m));
     $('#albumart-link').attr('href',atob(data['album'].image_xl));
     $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a> <a href="'+atob(data['track'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
-    $('.artist').html('<a target="_blank" href="'+atob(data['artist'].lastfm_url)+'">'+atob(data['info'].artist));
+    $('.artist').html('<a target="_blank" href="'+atob(data['artist'].lastfm_url)+'">'+atob(data['info'].artist)+'</a>');
     if (atob(data['album'].title) != 'Not found') {
-      $('.album').html('<a target="_blank" href="'+atob(data['album'].lastfm_url)+'">'+atob(data['album'].title));
+      $('.album').html('<a target="_blank" href="'+atob(data['album'].lastfm_url)+'">'+atob(data['album'].title)+'</a> <a href="'+atob(data['album'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
     }
     else $('.album').text(atob(data['album'].title));
   });

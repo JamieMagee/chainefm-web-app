@@ -8,6 +8,7 @@ define(GET_TRACK_INFO, true); //get information of the current song from last.fm
 define(GET_ALBUM_INFO, true); //get extra information of the album from last.fm, if enabled, may increase script execute time
 define(GET_ARTIST_INFO, false); //get extra information of the artist from last.fm, if enabled, may increase script execute time
 define(GET_TRACK_BUY_LINK, true); //get buy links on Amazon, iTunes and 7digital
+define(GET_ALBUM_BUY_LINK, true); //get buy links on Amazon, iTunes and 7digital
 define(GET_LYRICS, false); //get lyrics of the current song using chartlyrics.com's API
 define(CACHE_ALBUM_ART, false);//cache album art images to local server
 define(RECORD_HISTORY, false);//record play history of your radio
