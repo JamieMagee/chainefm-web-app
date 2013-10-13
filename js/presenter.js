@@ -34,7 +34,7 @@ $(document).ready(function () {
     presenters=unique(presenters.sort());
 
     for (var i = 0; i < presenters.length; i++) {
-      $('#accordion').append('<div class="panel panel-default" id="'+presenters[i].replace(/\s/g, "")+'"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse'+toTitleCase(convert(i+1))+'"><div class="panel-heading"><h4 class="panel-title">'+presenters[i]+'</h4></div></a><div id="collapse'+toTitleCase(convert(i+1))+'" class="panel-collapse collapse"><div class="panel-body"><img class="pull-left media-object" src="/img/presenters/'+presenters[i]+'.png" alt="'+presenters[i]+'"><h4>About</h4>'+info[presenters[i]]+'<br><h4>On Air</h4><table class="table table-striped"><thead><tr><th>Day</th><th>Time</th><th>Show</th></tr></thead><tbody class="'+presenters[i].replace(/\s/g, "")+'"></tbody></div></div></div>');
+      $('#accordion').append('<div class="panel panel-default" id="'+presenters[i].replace(/\s/g, "")+'"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse'+presenters[i].replace(/\s/g, "")+'"><div class="panel-heading"><h4 class="panel-title">'+presenters[i]+'</h4></div></a><div id="collapse'+presenters[i].replace(/\s/g, "")+'" class="panel-collapse collapse"><div class="panel-body"><img class="pull-left media-object" src="/img/presenters/'+presenters[i]+'.png" alt="'+presenters[i]+'"><h4>About</h4>'+info[presenters[i]]+'<br><h4>On Air</h4><table class="table table-striped"><thead><tr><th>Day</th><th>Time</th><th>Show</th></tr></thead><tbody class="'+presenters[i].replace(/\s/g, "")+'"></tbody></div></div></div>');
     };
     
     for (var i = 0; i < presenters.length; i++) {
@@ -43,8 +43,14 @@ $(document).ready(function () {
           $('tbody.'+presenters[i].replace(/\s/g, "")).append('<tr><td>'+toTitleCase($(this).closest('Table').attr('id').substr(0,$(this).closest('Table').attr('id').length-5))+'</td><td>'+$($($(this).closest('tr').get(0)).find('td')[0]).text()+'</td><td>'+$($($(this).closest('tr').get(0)).find('td')[1]).text()+'</td></tr>');
         }
       });
-    };
-  });
+    };  
+    if (location.hash){
+      $(location.hash).collapse('show');
+      $(location.hash).on('shown.bs.collapse', function() {
+        $('html, body').animate({scrollTop: $(location.hash).offset().top-100}, 2000);
+      });
+    }
+  }); 
 });
 
 

@@ -17,37 +17,51 @@ function getDayNum() {
 	case 0:
 		$("#Sunday").addClass('panel-primary');
 		highlightTime('#sunday');
-		$("#collapseSeven").collapse('show')
+		$("#collapseSeven").collapse('show').on('shown.bs.collapse', function() {
+      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+    });
 		break;
 	case 1:
 		$("#Monday").addClass('panel-primary');
 		highlightTime('#monday');
-		$("#collapseOne").collapse('show')
+		$("#collapseOne").collapse('show').on('shown.bs.collapse', function() {
+      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+    });
 		break;
 	case 2:
 		$("#Tuesday").addClass('panel-primary');
 		highlightTime('#tuesday');
-		$("#collapseTwo").collapse('show')
+		$("#collapseTwo").collapse('show').on('shown.bs.collapse', function() {
+      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+    });
 		break;
 	case 3:
 		$("#Wednesday").addClass('panel-primary');
 		highlightTime('#wednesday');
-		$("#collapseThree").collapse('show')
+		$("#collapseThree").collapse('show').on('shown.bs.collapse', function() {
+      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+    });
 		break;
 	case 4:
 		$("#Thursday").addClass('panel-primary');
 		highlightTime('#thursday');
-		$("#collapseFour").collapse('show')
+		$("#collapseFour").collapse('show').on('shown.bs.collapse', function() {
+      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+    });
 		break;
 	case 5:
 		$("#Friday").addClass('panel-primary');
 		highlightTime('#friday');
-		$("#collapseFive").collapse('show')
+		$("#collapseFive").collapse('show').on('shown.bs.collapse', function() {
+      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+    });
 		break;
 	case 6:
 		$("#Saturday").addClass('panel-primary');
 		highlightTime('#saturday');
-		$("#collapseSix").collapse('show')
+		$("#collapseSix").collapse('show').on('shown.bs.collapse', function() {
+      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+    });
 		break;
 	}
 }
