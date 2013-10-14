@@ -125,7 +125,10 @@ function getStats() {
   $.getJSON("icecast-stats/info.json", function( data ) {
     $('.albumart').attr('src',atob(data['album'].image_m));
     $('#albumart-link').attr('href',atob(data['album'].image_xl));
-    $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a> <a target="_blank" href="'+atob(data['track'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
+    if (atob(data['album'].title) != 'Not found') {
+      $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a> <a target="_blank" href="'+atob(data['track'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
+    }
+    else $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a>');
     $('.artist').html('<a target="_blank" href="'+atob(data['artist'].lastfm_url)+'">'+atob(data['info'].artist)+'</a>');
     if (atob(data['album'].title) != 'Not found') {
       $('.album').html('<a target="_blank" href="'+atob(data['album'].lastfm_url)+'">'+atob(data['album'].title)+'</a> <a target="_blank" href="'+atob(data['album'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
