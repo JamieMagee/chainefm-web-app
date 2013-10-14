@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require('config.php');
 $stream = getStreamInfo();
@@ -6,7 +6,10 @@ if($stream['info']['status'] == 'OFF AIR'){
 	cacheVar($stream);
 }
 else{
-	$last_song = @file_get_contents('last.txt');
+	if (file_exists('last.txt')){
+		$last_song = file_get_contents('last.txt');
+	}
+	else $last_song='';
 	if($last_song != base64_encode($stream['info']['song'])){
 		$stream = init($stream);
 		$stream = getInfo($stream);
@@ -17,7 +20,10 @@ else{
 		}
 	}
 	else{
-		$stream = array_decode(json_decode(@file_get_contents('info.json'), TRUE));
+		if (file_exists('info.json')){
+			$stream = array_decode(json_decode(file_get_contents('info.json'), TRUE));
+		}
+		else $stream = '';
 	}
 }
 print_r($stream);
