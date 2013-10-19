@@ -42,6 +42,11 @@
     
     <!-- Prompt iOS users to add web app to homescreen -->
     <link rel="stylesheet" href="css/add2home.css">
+    <script type="text/javascript">
+    var addToHomeConfig = {
+      returningVisitor: true
+    };
+    </script>
     <script type="application/javascript" src="js/add2home.js"></script>
     
   </head>
@@ -67,7 +72,7 @@
             <li><a href="presenters" target="otherFrame"><i class="icon-group"></i> Presenters</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="about"><i class="icon-info-sign" target="_blank"></i> About</a></li>
+            <li><a href="about" target="otherFrame"><i class="icon-info-sign"></i> About</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-share"></i> Share <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -117,8 +122,8 @@
           <i id="volume-icon" class="icon-volume-up icon-2x"></i>
         </div>
         <audio id="radio">
-          <source src="http://stream-tx1.radioparadise.com:80/mp3-192" type="audio/mpeg">
-          <source src="http://stream-tx1.radioparadise.com:80/ogg-192" type="audio/ogg">
+          <source src="http://stream.chainefm.com:8004/;" type="audio/mpeg">
+          <!-- <source src="http://stream-tx1.radioparadise.com:80/ogg-192" type="audio/ogg"> -->
           <p>Your browser does not support the audio element. Please consider updating to a newer browser.</p>
         </audio>
         <br><br>

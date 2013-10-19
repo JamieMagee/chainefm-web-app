@@ -1,5 +1,4 @@
 <?php
-
 require('config.php');
 $stream = getStreamInfo();
 if($stream['info']['status'] == 'OFF AIR'){
@@ -26,6 +25,7 @@ else{
 		else $stream = '';
 	}
 }
+
 print_r($stream);
 
 function obj_to_array($obj){
@@ -38,23 +38,54 @@ function obj_to_array($obj){
 }
 
 function getStreamInfo(){
-	$str = file_get_contents(SERVER.'/status.xsl?mount='.MOUNT);
-	if(preg_match_all('/<td\s[^>]*class=\"streamdata\">(.*)<\/td>/isU', $str, $match)){
+	
+	//Shoutcast
+	$options = array(
+	  'http'=>array(
+		'method'=>"GET",
+		'header'=>"Accept-language: en\r\n" .
+				  "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
+				  "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
+	  )
+	);
+
+	$context = stream_context_create($options);
+	$str = file_get_contents(SERVER.'/'.MOUNT,false, $context);
+	if(preg_match_all('/<b>(.*)<\/b>/isU', $str, $match)){
 		$stream['info']['status'] = 'ON AIR';
-		$stream['info']['title'] = $match[1][0]; 
+		$stream['info']['title'] = $match[1][4]; 
 		//$stream['info']['description'] = $match[1][1]; 
-		$stream['info']['type'] = $match[1][1]; 
-		$stream['info']['start'] = $match[1][2]; 
-		$stream['info']['bitrate'] = $match[1][3]; 
-		$stream['info']['listeners'] = $match[1][4]; 
-		$stream['info']['msx_listeners'] = $match[1][5]; 
+		$stream['info']['type'] = $match[1][5]; 
+		$stream['info']['start'] = $match[1][3]; 
+		//$stream['info']['bitrate'] = $match[1][3]; 
+		//$stream['info']['listeners'] = $match[1][4]; 
+		//$stream['info']['msx_listeners'] = $match[1][5]; 
 		$stream['info']['genre'] = $match[1][6]; 
 		$stream['info']['stream_url'] = $match[1][7];
-		$stream['info']['artist_song'] = $match[1][8];
-			$x = explode(" - ",$match[1][8]); 
+		$stream['info']['artist_song'] = $match[1][10];
+			$x = explode(" - ",$match[1][10]); 
+			$y = explode("(",$x[1]);
 		$stream['info']['artist'] = $x[0]; 
-		$stream['info']['song'] = $x[1];
+		$stream['info']['song'] = $y[0];
 	}
+	// Icecast
+	// $str = file_get_contents(SERVER.'/status.xsl?mount='.MOUNT);
+	// if(preg_match_all('/<td\s[^>]*class=\"streamdata\">(.*)<\/td>/isU', $str, $match)){
+		// $stream['info']['status'] = 'ON AIR';
+		// $stream['info']['title'] = $match[1][0]; 
+		// //$stream['info']['description'] = $match[1][1]; 
+		// $stream['info']['type'] = $match[1][1]; 
+		// $stream['info']['start'] = $match[1][2]; 
+		// $stream['info']['bitrate'] = $match[1][3]; 
+		// $stream['info']['listeners'] = $match[1][4]; 
+		// $stream['info']['msx_listeners'] = $match[1][5]; 
+		// $stream['info']['genre'] = $match[1][6]; 
+		// $stream['info']['stream_url'] = $match[1][7];
+		// $stream['info']['artist_song'] = $match[1][8];
+			// $x = explode(" - ",$match[1][8]); 
+		// $stream['info']['artist'] = $x[0]; 
+		// $stream['info']['song'] = $x[1];
+	// }
 	else{
 		$stream['info']['status'] = 'OFF AIR';
 	}
@@ -64,7 +95,7 @@ function getStreamInfo(){
 //get information of the current song use last.fm's API
 function getTrackInfo($stream){
 	$url = str_replace('#','','http://ws.audioscrobbler.com/2.0/?method=track.getinfo&artist='.urlencode($stream['info']['artist']).'&track='.urlencode($stream['info']['song']).'&api_key='.LAST_FM_API);
-	$xml = @@simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['track']['album']['image']){
@@ -91,7 +122,7 @@ function getTrackInfo($stream){
 //get extra information of the album
 function getAlbumInfo($stream){
 	$url = str_replace('#','', 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist='.urlencode($stream['info']['artist']).'&album='.($stream['album']['title']).'&api_key='.LAST_FM_API);
-	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 	if ($xml['album']['releasedate'] && strlen($xml['album']['releasedate']) > 10){
 		$stream['album']['releasedate'] = reset(explode(",",$xml['album']['releasedate']));
@@ -111,7 +142,7 @@ function getAlbumInfo($stream){
 //get extra information of the artist		
 function getArtistInfo($stream){
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist='.urlencode($stream['info']['artist']).'&api_key='.LAST_FM_API.'&autocorrect=1';
-	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['topalbums']['album']){
@@ -121,7 +152,7 @@ function getArtistInfo($stream){
 	}
 	
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist='.urlencode($stream['info']['artist']).'&api_key='.LAST_FM_API.'&autocorrect=1';
-	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['artist']['bio']['summary']){
@@ -134,7 +165,7 @@ function getArtistInfo($stream){
 //get buylink	
 function getTrackBuyLink($stream){
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=track.getbuylinks&artist='.urlencode($stream['info']['artist']).'&track='.urlencode($stream['info']['song']).'&api_key='.LAST_FM_API.'&country='.urlencode('GB').'&autocorrect=1';
-	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['affiliations']['physicals']['affiliation']){
@@ -166,7 +197,7 @@ function getTrackBuyLink($stream){
 
 function getAlbumBuyLink($stream){
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getbuylinks&artist='.urlencode($stream['info']['artist']).'&album='.urlencode($stream['album']['title']).'&api_key='.LAST_FM_API.'&country='.urlencode('GB').'&autocorrect=1';
-	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['affiliations']['physicals']['affiliation']){
@@ -210,7 +241,7 @@ function cacheAlbumArt($image_url){
 //get lyrics from chartlyrics.com's API
 function getLyric($artist, $song){
 	$url = str_replace('\'','','http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist='.urlencode($artist).'&song='.urlencode($song));
-	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['LyricId'] && ($xml['Lyric'] != array())){
@@ -222,6 +253,7 @@ function getLyric($artist, $song){
 }
 
 function getInfo($stream){
+	$time_start = microtime(true); 
 	if(!$stream['info']['song']){
 		$stream['info']['song'] == 'Not found';
 		return $stream;
@@ -247,7 +279,9 @@ function getInfo($stream){
 	if(GET_LYRICS == TRUE){
 		$stream['track']['lyric'] = getLyric($stream['info']['artist'], $stream['info']['song']);
 	}
-	$stream['fetch_time'] = time();
+	$stream['fetch_time'] = date("D M j G:i:s T");
+	$time_end = microtime(true);
+	$stream['execution_time'] = ($time_end - $time_start).' seconds';
 	return $stream;
 }
 
@@ -309,7 +343,7 @@ function cacheHistory($stream){
 }
 
 function createHistory(){
-	$history = json_decode(@file_get_contents('var/history.json'), TRUE);
+	$history = json_decode(file_get_contents('var/history.json'), TRUE);
 	$year = date('Y');
 	$month = date('m');
 	$day = date('d');
