@@ -16,7 +16,7 @@
     <title>Chaine FM</title>
 
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css">
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
@@ -67,20 +67,20 @@
 
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="contact" target="otherFrame"><i class="icon-comments"></i> Contact</a></li>
-            <li><a href="schedule" target="otherFrame"><i class="icon-calendar"></i> Schedule</a></li>
-            <li><a href="presenters" target="otherFrame"><i class="icon-group"></i> Presenters</a></li>
+            <li><a href="contact" target="otherFrame"><i class="fa fa-comments"></i> Contact</a></li>
+            <li><a href="schedule" target="otherFrame"><i class="fa fa-calendar"></i> Schedule</a></li>
+            <li><a href="presenters" target="otherFrame"><i class="fa fa-group"></i> Presenters</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="about" target="otherFrame"><i class="icon-info-sign"></i> About</a></li>
+            <li><a href="about" target="otherFrame"><i class="fa fa-info-circle"></i> About</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-share"></i> Share <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-square-o"></i> Share <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li id="facebook"><a onclick="window.open('//www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); return false;"><i class="icon-facebook-sign"></i> Facebook</a></li>
-                <li id="twitter"><a onclick="window.open('//twitter.com/intent/tweet?url='+encodeURIComponent(location.href)); return false;"><i class="icon-twitter-sign"></i> Twitter</a></li>
-                <li id="google-plus"><a onclick="window.open('//plus.google.com/share?url='+encodeURIComponent(location.href)); return false;"><i class="icon-google-plus-sign"></i> Google+</a></li>
-                <li id="email"><a onclick="window.open('mailto:?subject=Chaine FM Web App&amp;body='+encodeURIComponent(location.href)); return false;"><i class="icon-envelope"></i> Email</a></li>
-                <li id="sms"><a onclick="window.open('sms:?body='+encodeURIComponent(location.href)); return false;"><i class="icon-comment"></i> SMS</a></li>
+                <li id="facebook"><a onclick="window.open('//www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)); return false;"><i class="fa fa-facebook-square"></i> Facebook</a></li>
+                <li id="twitter"><a onclick="window.open('//twitter.com/intent/tweet?url='+encodeURIComponent(location.href)); return false;"><i class="fa fa-twitter-square"></i> Twitter</a></li>
+                <li id="google-plus"><a onclick="window.open('//plus.google.com/share?url='+encodeURIComponent(location.href)); return false;"><i class="fa fa-google-plus-square"></i> Google+</a></li>
+                <li id="email"><a onclick="window.open('mailto:?subject=Chaine FM Web App&amp;body='+encodeURIComponent(location.href)); return false;"><i class="fa fa-envelope"></i> Email</a></li>
+                <li id="sms"><a onclick="window.open('sms:?body='+encodeURIComponent(location.href)); return false;"><i class="fa fa-comment"></i> SMS</a></li>
               </ul>
             </li>
           </ul>
@@ -91,7 +91,7 @@
     <div class="container">
     <!--<div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <p><i class="icon-warning-sign"></i> This app may use up to 1MB/minute while playing</p>
+      <p><i class="fa fa-exclamation-triangle"></i> This app may use up to 1MB/minute while playing</p>
       <p>Chaine FM does not accept any responsibility for data charges incurred in using this app</p>
     </div>-->
     <div class="row">
@@ -116,10 +116,10 @@
           </tr>
         </table>
         <br>
-        <i id="playpause" class="icon-refresh icon-spin icon-2x"></i>
+        <i id="playpause" class="fa fa-refresh fa-spin fa-2x"></i>
         <div id="volume"></div>
         <div id="volume-icon">
-          <i id="volume-icon" class="icon-volume-up icon-2x"></i>
+          <i class="fa fa-volume-up fa-2x"></i>
         </div>
         <audio id="radio">
           <source src="http://stream.chainefm.com:8004/;" type="audio/mpeg">
