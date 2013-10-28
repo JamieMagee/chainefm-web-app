@@ -127,13 +127,19 @@ small {
 }
 
 #facebook > a:hover {
-  background-color: #6D8BC9;
+  background-color: #3b5998;
   background-image: none;
   filter: none;
 }
 
 #twitter > a:hover {
   background-color: #00aced;
+  background-image: none;
+  filter: none;
+}
+
+#pinterest > a:hover {
+  background-color: #C92228;
   background-image: none;
   filter: none;
 }
