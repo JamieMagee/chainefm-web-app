@@ -18,49 +18,49 @@ function getDayNum() {
 		$("#Sunday").addClass('panel-primary');
 		highlightTime('#sunday');
 		$("#collapseSeven").collapse('show').on('shown.bs.collapse', function() {
-      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+      $('html, body').animate({scrollTop: $('.success').offset().top-100}, 1000);
     });
 		break;
 	case 1:
 		$("#Monday").addClass('panel-primary');
 		highlightTime('#monday');
 		$("#collapseOne").collapse('show').on('shown.bs.collapse', function() {
-      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+      $('html, body').animate({scrollTop: $('.success').offset().top-100}, 1000);
     });
 		break;
 	case 2:
 		$("#Tuesday").addClass('panel-primary');
 		highlightTime('#tuesday');
 		$("#collapseTwo").collapse('show').on('shown.bs.collapse', function() {
-      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+      $('html, body').animate({scrollTop: $('.success').offset().top-100}, 1000);
     });
 		break;
 	case 3:
 		$("#Wednesday").addClass('panel-primary');
 		highlightTime('#wednesday');
 		$("#collapseThree").collapse('show').on('shown.bs.collapse', function() {
-      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+      $('html, body').animate({scrollTop: $('.success').offset().top-100}, 1000);
     });
 		break;
 	case 4:
 		$("#Thursday").addClass('panel-primary');
 		highlightTime('#thursday');
 		$("#collapseFour").collapse('show').on('shown.bs.collapse', function() {
-      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+      $('html, body').animate({scrollTop: $('.success').offset().top-100}, 1000);
     });
 		break;
 	case 5:
 		$("#Friday").addClass('panel-primary');
 		highlightTime('#friday');
 		$("#collapseFive").collapse('show').on('shown.bs.collapse', function() {
-      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+      $('html, body').animate({scrollTop: $('.success').offset().top-100}, 1000);
     });
 		break;
 	case 6:
 		$("#Saturday").addClass('panel-primary');
 		highlightTime('#saturday');
 		$("#collapseSix").collapse('show').on('shown.bs.collapse', function() {
-      $('html, body').animate({scrollTop: $(this).offset().top-100}, 1000);
+      $('html, body').animate({scrollTop: $('.success').offset().top-100}, 1000);
     });
 		break;
 	}
