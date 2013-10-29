@@ -155,3 +155,11 @@ small {
   background-image: none;
   filter: none;
 }
+
+.btn-group {
+  width: 100%;
+}
+
+.btn {
+  width: 25%;
+}
