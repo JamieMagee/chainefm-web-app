@@ -123,16 +123,16 @@ function getStats() {
   });
 
   $.getJSON("icecast-stats/info.json", function( data ) {
-    $('.albumart').attr('src',atob(data['album'].image_m));
-    $('#albumart-link').attr('href',atob(data['album'].image_xl)).attr('title', atob(data['album'].title));
-    if (atob(data['album'].title) != 'Not found') {
-      $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a> <a target="_blank" href="'+atob(data['track'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
+    $('.albumart').attr('src',data['album'].image_m);
+    $('#albumart-link').attr('href',data['album'].image_xl).attr('title', data['album'].title);
+    if (data['album'].title != 'Not found') {
+      $('.track').html('<a target="_blank" href="'+data['track'].lastfm_url+'">'+data['info'].song+'</a> <a target="_blank" href="'+data['track'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
     }
-    else $('.track').html('<a target="_blank" href="'+atob(data['track'].lastfm_url)+'">'+atob(data['info'].song)+'</a>');
-    $('.artist').html('<a target="_blank" href="'+atob(data['artist'].lastfm_url)+'">'+atob(data['info'].artist)+'</a>');
-    if (atob(data['album'].title) != 'Not found') {
-      $('.album').html('<a target="_blank" href="'+atob(data['album'].lastfm_url)+'">'+atob(data['album'].title)+'</a> <a target="_blank" href="'+atob(data['album'].buylink['download'].iTunes['link'])+'"<span class="label label-success">Buy</span></a>');
+    else $('.track').html('<a target="_blank" href="'+data['track'].lastfm_url+'">'+data['info'].song+'</a>');
+    $('.artist').html('<a target="_blank" href="'+data['artist'].lastfm_url+'">'+data['info'].artist+'</a>');
+    if (data['album'].title != 'Not found') {
+      $('.album').html('<a target="_blank" href="'+data['album'].lastfm_url+'">'+data['album'].title+'</a> <a target="_blank" href="'+data['album'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
     }
-    else $('.album').text(atob(data['album'].title));
+    else $('.album').text(data['album'].title);
   });
 }

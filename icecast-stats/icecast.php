@@ -9,10 +9,10 @@ else{
 		$last_song = file_get_contents('last.txt');
 	}
 	else $last_song='';
-	if($last_song != base64_encode($stream['info']['song'])){
+	if($last_song != $stream['info']['song']){
 		$stream = init($stream);
 		$stream = getInfo($stream);
-		file_put_contents('last.txt', base64_encode($stream['info']['song']));
+		file_put_contents('last.txt', $stream['info']['song']);
 		cacheVar($stream);
 		if(RECORD_HISTORY == true){
 			cacheHistory($stream);
@@ -291,7 +291,7 @@ function array_encode($array){
 			$array[$key] = array_encode($value);
 		}
 		else{
-			$array[$key] = base64_encode($value);
+			$array[$key] = $value;
 		}
 	}
 	return $array;
@@ -303,7 +303,7 @@ function array_decode($array){
 			$array[$key] = array_decode($value);
 		}
 		else{
-			$array[$key] = base64_decode($value);
+			$array[$key] = $value;
 		}
 	}
 	return $array;
