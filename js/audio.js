@@ -55,9 +55,9 @@ $(document).ready(function () {
     }
   });
   
-  $("#radio").on("canplaythrough", function(){
-    $('#playpause').attr( "class", "fa fa-play fa-2x");
-  });
+  // $("#radio").on("canplaythrough", function(){
+    // $('#playpause').attr( "class", "fa fa-play fa-2x");
+  // });
   
   $("#radio").on("stalled", function(){
     $('#playpause').attr( "class", "fa fa-refresh fa-spin fa-2x");
