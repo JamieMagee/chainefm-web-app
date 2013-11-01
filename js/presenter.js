@@ -30,7 +30,7 @@ $(document).ready(function () {
   $.get("schedule.html", function (data) {
     var data = $(data);
     var presenters = [];
-    $('Table>tbody>tr>td:nth-child(3)', data).each( function () {presenters.push($(this).html());});
+    $('Table>tbody>tr>td:nth-child(3)>a', data).each( function () {presenters.push($(this).html());});
     presenters=unique(presenters.sort());
 
     for (var i = 0; i < presenters.length; i++) {
@@ -38,7 +38,7 @@ $(document).ready(function () {
     };
     
     for (var i = 0; i < presenters.length; i++) {
-      $('Table>tbody>tr>td:nth-child(3)', data).each( function () {
+      $('Table>tbody>tr>td:nth-child(3)>a', data).each( function () {
         if ($(this).html()==presenters[i]){
           $('tbody.'+presenters[i].replace(/\s/g, "")).append('<tr><td>'+toTitleCase($(this).closest('Table').attr('id').substr(0,$(this).closest('Table').attr('id').length-5))+'</td><td>'+$($($(this).closest('tr').get(0)).find('td')[0]).text()+'</td><td>'+$($($(this).closest('tr').get(0)).find('td')[1]).text()+'</td></tr>');
         }
