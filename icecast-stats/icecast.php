@@ -322,34 +322,38 @@ function cacheHistory($stream){
 	$month = date('m');
 	$day = date('d');
 	if(!is_dir('history')){
-		mkdir('history', 0777);
+		mkdir('history', 0775);
 	}
 	if(!is_dir('history/'.$year)){
-		mkdir('history/'.$year);
+		mkdir('history/'.$year, 0775);
 	}
 	if(!is_dir('history/'.$year.'/'.$month)){
-		mkdir('history/'.$year.'/'.$month);
+		mkdir('history/'.$year.'/'.$month, 0775);
 	}
 	$file = 'history/'.$year.'/'.$month.'/'.$day.'.json';
-	$history['time'] = gmdate('c');
-	$history['artist'] = $stream['info']['artist'];
+	$history['time'] = date("D M j G:i:s T");
 	$history['song'] = $stream['info']['song'];
-	$history['image'] = $stream['album']['image_s'];
-	$history['itunes'] = $stream['track']['buylink']['download']['iTunes']['link'];
-	$history['Amazon'] = $stream['track']['buylink']['download']['Amazon']['link'];
+	$history['song_url'] = $stream['track']['lastfm_url'];
+	$history['artist'] = $stream['info']['artist'];
+	$history['artist_url'] = $stream['artist']['lastfm_url'];
+	$history['album'] = $stream['album']['title'];
+	$history['album_url'] = $stream['album']['lastfm_url'];
+	$history['image'] = $stream['album']['image_xl'];
+	$history['itunes_track'] = $stream['track']['buylink']['download']['iTunes']['link'];
+	$history['itunes_album'] = $stream['album']['buylink']['download']['iTunes']['link'];
 	$history = array_encode($history);
-	file_put_contents($file, json_encode($history));
-	createHistory();
+	file_put_contents($file, json_encode($history), FILE_APPEND);
+	//createHistory();
 }
 
 function createHistory(){
-	$history = json_decode(file_get_contents('var/history.json'), TRUE);
+	$history = json_decode(file_get_contents('history.json'), TRUE);
 	$year = date('Y');
 	$month = date('m');
 	$day = date('d');
 	$history[$year][$month][$day] = $year.$month.$day;
 	$file = 'history/'.$year.'/'.$month.'/'.$day.'.json';
-	file_put_contents('var/history.json', json_encode($history));
+	file_put_contents('history.json', json_encode($history));
 }
 
 
