@@ -127,7 +127,8 @@ function getStats() {
       $('#albumart-link').attr('href',data['album'].image_xl).attr('title', data['album'].title);
       $('.track').html('<a target="_blank" href="'+data['track'].lastfm_url+'">'+data['info'].song+'</a> <a target="_blank" href="'+data['track'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
       $('.artist').html('<a target="_blank" href="'+data['artist'].lastfm_url+'">'+data['info'].artist+'</a>');
-        $('.album').html('<a target="_blank" href="'+data['album'].lastfm_url+'">'+data['album'].title+'</a> <a target="_blank" href="'+data['album'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
+      if (data['album'].title != 'Not found') $('.album').html('<a target="_blank" href="'+data['album'].lastfm_url+'">'+data['album'].title+'</a> <a target="_blank" href="'+data['album'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
+      else $('.album').html('<a target="_blank" href="'+data['album'].lastfm_url+'">'+data['album'].title+'</a>');
     })
   ).done( function() {
     $('table.table>tbody>tr>td>a').each( function() {
