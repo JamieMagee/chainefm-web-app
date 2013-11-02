@@ -261,7 +261,7 @@ function getInfo($stream){
 	if(GET_TRACK_INFO == TRUE){
 		$stream = getTrackInfo($stream);
 	}
-	if(GET_ALBUM_INFO && isset($stream['album']['title'])){
+	if(GET_ALBUM_INFO && isset($stream['album']['title']) && $stream['album']['title'] != 'Not found'){
 		$stream = getAlbumInfo($stream);
 	}
 	if(GET_ARTIST_INFO == TRUE){
@@ -270,7 +270,7 @@ function getInfo($stream){
 	if(GET_TRACK_BUY_LINK == TRUE){
 		$stream = getTrackBuyLink($stream);
 	}
-	if(GET_ALBUM_BUY_LINK == TRUE && isset($stream['album']['title'])){
+	if(GET_ALBUM_BUY_LINK == TRUE && isset($stream['album']['title']) && $stream['album']['title'] != 'Not found'){
 		$stream = getAlbumBuyLink($stream);
 	}
 	if(CACHE_ALBUM_ART == TRUE){
