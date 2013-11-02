@@ -2,7 +2,16 @@ $(document).ready(function () {
 
 	getDayNum();
   $('Table>tbody>tr>td:nth-child(2)').each(function(){ $(this).attr('data-container','body').attr('data-toggle','popover').attr('data-placement','bottom').attr('data-content',$(this).next().next().text()).wrapInner('<a></a>').popover()});
+  
+  
+    $('table>tbody>tr>td').on('click', function() {
+      $('td').not(this).popover('hide');
+    });
 
+    $('.panel-collapse').on('hide.bs.collapse', function() {
+      $('td').popover('hide');
+    });
+  
 	window.setInterval(function () {
 		$('.panel').removeClass('panel-primary');
 		$('tr').removeClass('success');

@@ -27,31 +27,42 @@ var info = {
 }
 
 $(document).ready(function () {
-  $.get("schedule.html", function (data) {
-    var data = $(data);
-    var presenters = [];
-    $('Table>tbody>tr>td:nth-child(3)>a', data).each( function () {presenters.push($(this).html());});
-    presenters=unique(presenters.sort());
+  $.when(
+    $.get("schedule.html", function (data) {
+      var data = $(data);
+      var presenters = [];
+      $('Table>tbody>tr>td:nth-child(3)>a', data).each( function () {presenters.push($(this).html());});
+      presenters=unique(presenters.sort());
 
-    for (var i = 0; i < presenters.length; i++) {
-      $('#accordion').append('<div class="panel panel-default" id="'+presenters[i].replace(/\s/g, "")+'"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse'+presenters[i].replace(/\s/g, "")+'"><div class="panel-heading"><h4 class="panel-title">'+presenters[i]+'</h4></div></a><div id="collapse'+presenters[i].replace(/\s/g, "")+'" class="panel-collapse collapse"><div class="panel-body"><img class="pull-left media-object" src="/img/presenters/'+presenters[i]+'.png" alt="'+presenters[i]+'"><h4>About</h4>'+info[presenters[i]]+'<br><h4>On Air</h4><table class="table table-striped"><thead><tr><th>Day</th><th>Time</th><th>Show</th></tr></thead><tbody class="'+presenters[i].replace(/\s/g, "")+'"></tbody></div></div></div>');
-    };
-    
-    for (var i = 0; i < presenters.length; i++) {
-      $('Table>tbody>tr>td:nth-child(3)>a', data).each( function () {
-        if ($(this).html()==presenters[i]){
-          $('tbody.'+presenters[i].replace(/\s/g, "")).append('<tr><td>'+toTitleCase($(this).closest('Table').attr('id').substr(0,$(this).closest('Table').attr('id').length-5))+'</td><td>'+$($($(this).closest('tr').get(0)).find('td')[0]).text()+'</td><td data-container="body" data-placement="bottom" data-toggle="popover" data-content="'+$($($(this).closest('tr').get(0)).find('td')[3]).text()+'"><a>'+$($($(this).closest('tr').get(0)).find('td')[1]).text()+'</a></td></tr>');
-          $('Table>tbody>tr>td:nth-child(3)').popover();
-        }
-      });
-    };  
-    if (location.hash){
-      $(location.hash).collapse('show');
-      $(location.hash).on('shown.bs.collapse', function() {
-        $('html, body').animate({scrollTop: $(location.hash).offset().top-100}, 2000);
-      });
-    }
-  }); 
+      for (var i = 0; i < presenters.length; i++) {
+        $('#accordion').append('<div class="panel panel-default" id="'+presenters[i].replace(/\s/g, "")+'"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse'+presenters[i].replace(/\s/g, "")+'"><div class="panel-heading"><h4 class="panel-title">'+presenters[i]+'</h4></div></a><div id="collapse'+presenters[i].replace(/\s/g, "")+'" class="panel-collapse collapse"><div class="panel-body"><img class="pull-left media-object" src="/img/presenters/'+presenters[i]+'.png" alt="'+presenters[i]+'"><h4>About</h4>'+info[presenters[i]]+'<br><h4>On Air</h4><table class="table table-striped"><thead><tr><th>Day</th><th>Time</th><th>Show</th></tr></thead><tbody class="'+presenters[i].replace(/\s/g, "")+'"></tbody></div></div></div>');
+      };
+      
+      for (var i = 0; i < presenters.length; i++) {
+        $('Table>tbody>tr>td:nth-child(3)>a', data).each( function () {
+          if ($(this).html()==presenters[i]){
+            $('tbody.'+presenters[i].replace(/\s/g, "")).append('<tr><td>'+toTitleCase($(this).closest('Table').attr('id').substr(0,$(this).closest('Table').attr('id').length-5))+'</td><td>'+$($($(this).closest('tr').get(0)).find('td')[0]).text()+'</td><td data-container="body" data-placement="bottom" data-toggle="popover" data-content="'+$($($(this).closest('tr').get(0)).find('td')[3]).text()+'"><a>'+$($($(this).closest('tr').get(0)).find('td')[1]).text()+'</a></td></tr>');
+            $('Table>tbody>tr>td:nth-child(3)').popover();
+          }
+        });
+      };  
+      if (location.hash){
+        $(location.hash).collapse('show');
+        $(location.hash).on('shown.bs.collapse', function() {
+          $('html, body').animate({scrollTop: $(location.hash).offset().top-100}, 2000);
+        });
+      }
+    })
+  ).done( function() {
+    $('table>tbody>tr>td').on('click', function() {
+      $('td').not(this).popover('hide');
+    });
+  }, function() {
+    $('.collapse').on('hide.bs.collapse', function() {
+      $('td').popover('hide');
+    });
+  });
+  
 });
 
 
