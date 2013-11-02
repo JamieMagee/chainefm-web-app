@@ -36,5 +36,6 @@ function getHistory(year, month, day) {
         else $(this).contents().unwrap()
       }
     });
+    $('table.table>tbody').html($('table.table>tbody').children('tr').get().reverse());
   });
 }
