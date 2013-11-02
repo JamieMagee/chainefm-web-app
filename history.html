@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
-	
+    
     <!-- favicon -->
     <link rel="shortcut icon" sizes="32x32" href="favicon.ico">
     <!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
@@ -55,13 +55,14 @@
           </button>
           <a class="navbar-brand" href="."><img src="img/icon25px.png" alt="Chaine FM logo"> <span style="color: #2184cf">Chaine</span> FM</a>
         </div>
-        
+
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><i class="fa fa-comments"></i> Contact</a></li>
-            <li><a href="schedule"><i class="fa fa-calendar"></i> Schedule</a></li>
+            <li><a href="contact"><i class="fa fa-comments" target="_blank"></i> Contact</a></li>
+            <li><a href="schedule"><i class="fa fa-calendar" target="_blank"></i> Schedule</a></li>
             <li><a href="presenters" target="otherFrame"><i class="fa fa-group"></i> Presenters</a></li>
-            <li><a href="history" target="otherFrame"><i class="fa fa-clock-o"></i> History</a></li>
+            <li class="active"><a href="#" target="otherFrame"><i class="fa fa-clock-o"></i> History</a></li>
+            
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="about" target="otherFrame"><i class="fa fa-info-circle"></i> About</a></li>
@@ -84,22 +85,37 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-xs-12">
-          <textarea class="form-control" id="message" rows="5" placeholder="Hey Chaine FM!" required></textarea>
+          <div class="form-group">
+            <div class="input-group date" id="datepicker">
+              <input type="text" class="form-control" disabled/>
+              <span class="input-group-addon"><span data-icon-element="" class="fa fa-calendar"></span>
+              </span>
+            </div>
+          </div>
           <br>
-          <div class="btn-group btn-group-sm">
-            <button id="sms-btn" type="button" class="btn btn-default"><i class="fa fa-comment"></i> SMS</button>
-            <button id="email-btn" type="button" class="btn btn-default"><i class="fa fa-envelope"></i> Email</button>
-            <button id="facebook-btn" type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Facebook does not allow direct posting to a page. Please copy your message to your clipboard and click again to open Facebook"><i class="fa fa-facebook-square"></i> Facebook</button>
-            <button id="twitter-btn" type="button" class="btn btn-default"><i class="fa fa-twitter-square"></i> Twitter</button>
-          </div>        
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Track</th>
+                <th>Artist</th>
+                <th>Album</th>
+              </tr>
+              <tbody>
+              </tbody>
+            </thead>
+          </table>
         </div>
       </div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="js/contact.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/moment.min.js"></script>
     <script src="js/hover.js"></script>
-    <script src="js/ga.js"></script>    
+    <script src="js/ga.js"></script>
   </body>
 </html>

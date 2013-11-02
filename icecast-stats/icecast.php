@@ -26,7 +26,7 @@ else{
 	}
 }
 
-print_r($stream);
+//print_r($stream);
 
 function obj_to_array($obj){
 	$array = (is_object) ? (array)$obj : $obj;
@@ -331,7 +331,7 @@ function cacheHistory($stream){
 		mkdir('history/'.$year.'/'.$month, 0775);
 	}
 	$file = 'history/'.$year.'/'.$month.'/'.$day.'.json';
-	$history['time'] = date("D M j G:i:s T");
+	$history['time'] = date("G:i");
 	$history['song'] = $stream['info']['song'];
 	$history['song_url'] = $stream['track']['lastfm_url'];
 	$history['artist'] = $stream['info']['artist'];
@@ -341,8 +341,18 @@ function cacheHistory($stream){
 	$history['image'] = $stream['album']['image_xl'];
 	$history['itunes_track'] = $stream['track']['buylink']['download']['iTunes']['link'];
 	$history['itunes_album'] = $stream['album']['buylink']['download']['iTunes']['link'];
-	$history = array_encode($history);
-	file_put_contents($file, json_encode($history), FILE_APPEND);
+	if (is_file($file)) {
+		$tempArray = json_decode(file_get_contents($file));
+		if (!is_array($tempArray)) {
+			$out = array($tempArray, $history);
+		}
+		else {
+			array_push($tempArray, $history);
+			$out = $tempArray;
+		}
+		file_put_contents($file, json_encode($out));
+	}
+	else file_put_contents($file, json_encode($history));
 	//createHistory();
 }
 
