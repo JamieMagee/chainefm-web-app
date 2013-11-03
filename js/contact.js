@@ -1,17 +1,21 @@
 $(document).ready(function () {
 
 	var i = 0;
+  var agent = navigator.userAgent;
+  
+  if (agent.match(/(iPhone|iPod|iPad)/)) var separator = ';'
+  else var separator = '?'
 	
 	$('#facebook-btn').popover()
 	$('#message-btn').focus();
 
 	$("#sms-btn").click(function () {
-		var uri = "sms:80818?body=CFM ";
+		var uri = "sms:80818"+separator+"body=CFM ";
 		cleanUp(uri);
 	});
 
 	$("#email-btn").click(function () {
-		var uri = "mailto:studio@chainefm.com?body=";
+		var uri = "mailto:studio@chainefm.com"+separator+"body=";
 		cleanUp(uri);
 	});
 
@@ -39,5 +43,5 @@ function cleanUp(uri) {
 	uri += $('#message').val();
 	$('#message').val('');
 	$('#message').focus();
-	window.open(uri);
+	window.open(uri, '_blank');
 }
