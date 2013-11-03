@@ -19,7 +19,6 @@
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="css/custom.css">
-    <script src="js/mailto.js"></script>
 	
     <!-- favicon -->
     <link rel="shortcut icon" sizes="32x32" href="favicon.ico">
@@ -56,17 +55,16 @@
           </button>
           <a class="navbar-brand" href="."><img src="img/icon25px.png" alt="Chaine FM logo"> <span style="color: #2184cf">Chaine</span> FM</a>
         </div>
-
         
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="contact"><i class="fa fa-comments"></i> Contact</a></li>
+            <li class="active"><a href="#"><i class="fa fa-comments"></i> Contact</a></li>
             <li><a href="schedule"><i class="fa fa-calendar"></i> Schedule</a></li>
             <li><a href="presenters"><i class="fa fa-group"></i> Presenters</a></li>
             <li><a href="history"><i class="fa fa-clock-o"></i> History</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#"><i class="fa fa-info-circle"></i> About</a></li>
+            <li><a href="about"><i class="fa fa-info-circle"></i> About</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share-square-o"></i> Share <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -85,20 +83,36 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-xs-12"> 
-          <div class="about">
-          <a href="//www.chainefm.com" class="no-highlight"><h1><span style="color: #2184cf">Chaine</span> FM</h1>
-          <h2>It's All About Larne</h2></a>
-          <p>App by <a href="//jamiemagee.co.uk">Jamie Magee</a></p>
-          <!-- <p><a href="//github.com/JamieMagee/chainefm-web-app"><i class="fa fa-github fa-lg no-highlight"></i> View Source on GitHub</a></p> -->
-          <script>mail2("android","chainefm",0,'?subject=Bug%20Report" class="btn btn-default" style="width:inherit','<i class="fa fa-bug"></i> Report Bug')</script> <script>mail2("android","chainefm",0,'?subject=Feature%20Request" class="btn btn-default" style="width:inherit','<i class="fa fa-lightbulb-o"></i> Request Feature')</script>
-          </div>
+        <div class="col-sm-12 col-xs-12">
+          <?php  
+            if (isset($_GET['s'])) echo "<div class=\"alert alert-success\">".$_GET['s']."</div>";  
+            elseif (isset($_GET['e'])) echo "<div class=\"alert alert-danger\">".$_GET['e']."</div>";  
+          ?>
+          <form class="form-horizontal" role="form" method="POST" action="contact-form-submission.php">
+            <div class="form-group">
+              <label for="input1" class="col-sm-2 control-label">Name</label>
+              <div class="col-sm-10">
+                <input name="contact_name" type="text" class="form-control" id="input1" placeholder="Name">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="input2" class="col-sm-2 control-label">Message</label>
+              <div class="col-sm-10">
+                <textarea name="contact_message" class="form-control" rows="6" id="input2" placeholder="Hey Chaine FM!"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="hidden" name="save" value="contact">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>       
         </div>
       </div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="js/contact.js"></script>
     <script src="js/hover.js"></script>
     <script src="js/ga.js"></script>    
   </body>
