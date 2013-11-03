@@ -125,14 +125,15 @@ function getStats() {
     $.getJSON("icecast-stats/info.json", function( data ) {
       $('.albumart').attr('src',data['album'].image_m);
       $('#albumart-link').attr('href',data['album'].image_xl).attr('title', data['album'].title);
-      $('.track').html('<a target="_blank" href="'+data['track'].lastfm_url+'">'+data['info'].song+'</a> <a target="_blank" href="'+data['track'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
+      if (typeof data['track'].buylink != "undefined") $('.track').html('<a target="_blank" href="'+data['track'].lastfm_url+'">'+data['info'].song+'</a> <a target="_blank" href="'+data['track'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
+      else $('.track').html('<a target="_blank" href="'+data['track'].lastfm_url+'">'+data['info'].song+'</a>');
       $('.artist').html('<a target="_blank" href="'+data['artist'].lastfm_url+'">'+data['info'].artist+'</a>');
       if (data['album'].title != 'Not found') $('.album').html('<a target="_blank" href="'+data['album'].lastfm_url+'">'+data['album'].title+'</a> <a target="_blank" href="'+data['album'].buylink['download'].iTunes['link']+'"<span class="label label-success">Buy</span></a>');
       else $('.album').html('<a target="_blank" href="'+data['album'].lastfm_url+'">'+data['album'].title+'</a>');
     })
   ).done( function() {
     $('table.table>tbody>tr>td>a').each( function() {
-      if ($(this).attr('href') == "null" || $(this).html() == "Not found") {
+      if ($(this).attr('href') == "null" || $(this).attr('href') == "undefined" || $(this).html() == "Not found") {
         if ($(this).html() == '<span class="label label-success">Buy</span>'){$(this).remove()}
         else $(this).contents().unwrap()
       }

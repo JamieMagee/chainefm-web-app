@@ -31,7 +31,7 @@ function getHistory(year, month, day) {
     })
   ).done( function() {
     $('table.table>tbody>tr>td>a').each( function() {
-      if ($(this).attr('href') == "null" || $(this).html() == "Not found") {
+      if ($(this).attr('href') == "null" || || $(this).attr('href') == "undefined" || $(this).html() == "Not found") {
         if ($(this).html() == '<span class="label label-success">Buy</span>'){$(this).remove()}
         else $(this).contents().unwrap()
       }
