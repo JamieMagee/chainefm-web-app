@@ -135,9 +135,6 @@ function getAlbumInfo($stream){
 	$url = str_replace('#','', 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist='.urlencode($stream['info']['artist']).'&album='.($stream['album']['title']).'&api_key='.LAST_FM_API);
 	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
-	if ($xml['album']['releasedate'] && strlen($xml['album']['releasedate']) > 10){
-		$stream['album']['releasedate'] = reset(explode(",",$xml['album']['releasedate']));
-	}
 	if($xml['album']['tracks']['track']){
 		foreach($xml['album']['tracks']['track'] as $track){
 			$stream['album']['track_list'][] = array('title' => $track['name'],'url' => $track['url']);
