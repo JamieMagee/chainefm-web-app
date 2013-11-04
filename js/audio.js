@@ -71,7 +71,7 @@ $(document).ready(function () {
   
   window.setInterval(function () {
     getStats();
-  }, 10000);
+  }, 30000);
 
   window.setInterval(function () {
     getOnAir();
@@ -117,10 +117,10 @@ function getOnAir() {
 }
 
 function getStats() {
-  $.ajax({
-    timeout: 10000,
-    url: "icecast-stats/icecast.php"
-  });
+  // $.ajax({
+    // timeout: 10000,
+    // url: "icecast-stats/icecast.php"
+  // });
   $.when(
     $.getJSON("icecast-stats/info.json", function( data ) {
       $('.albumart').attr('src',data['album'].image_m);

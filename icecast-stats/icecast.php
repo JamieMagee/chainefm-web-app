@@ -5,22 +5,22 @@ if($stream['info']['status'] == 'OFF AIR'){
 	cacheVar($stream);
 }
 else{
-	if (file_exists('last.txt')){
-		$last_song = file_get_contents('last.txt');
+	if (file_exists(dirname(__FILE__).'/last.txt')){
+		$last_song = file_get_contents(dirname(__FILE__).'/last.txt');
 	}
 	else $last_song='';
 	if($last_song != $stream['info']['song']){
 		$stream = init($stream);
 		$stream = getInfo($stream);
-		file_put_contents('last.txt', $stream['info']['song']);
+		file_put_contents(dirname(__FILE__).'/last.txt', $stream['info']['song']);
 		cacheVar($stream);
 		if(RECORD_HISTORY == true){
 			cacheHistory($stream);
 		}
 	}
 	else{
-		if (file_exists('info.json')){
-			$stream = array_decode(json_decode(file_get_contents('info.json'), TRUE));
+		if (file_exists(dirname(__FILE__).'/info.json')){
+			$stream = array_decode(json_decode(file_get_contents(dirname(__FILE__).'/info.json'), TRUE));
 		}
 		else $stream = '';
 	}
@@ -40,17 +40,28 @@ function obj_to_array($obj){
 function getStreamInfo(){
 	
 	//Shoutcast
-	$options = array(
-	  'http'=>array(
-		'method'=>"GET",
-		'header'=>"Accept-language: en\r\n" .
-				  "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
-				  "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
-	  )
-	);
+	// $options = array(
+	  // 'http'=>array(
+		// 'method'=>"GET",
+		// 'header'=>"Accept-language: en\r\n" .
+				  // "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
+				  // "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
+	  // )
+	// );
 
-	$context = stream_context_create($options);
-	$str = file_get_contents(SERVER.'/'.MOUNT,false, $context);
+	// $context = stream_context_create($options);
+	// $str = file_get_contents(SERVER.'/'.MOUNT,false, $context);
+  
+  $curl_handle=curl_init();
+  curl_setopt($curl_handle, CURLOPT_URL, SERVER.'/'.MOUNT);
+  curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+  curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Mozilla');
+  $str = curl_exec($curl_handle);
+  curl_close($curl_handle);
+  
+  //print_r($str);
+  
 	if(preg_match_all('/<b>(.*)<\/b>/isU', $str, $match)){
 		$stream['info']['status'] = 'ON AIR';
 		$stream['info']['title'] = $match[1][4]; 
@@ -95,7 +106,7 @@ function getStreamInfo(){
 //get information of the current song use last.fm's API
 function getTrackInfo($stream){
 	$url = str_replace('#','','http://ws.audioscrobbler.com/2.0/?method=track.getinfo&artist='.urlencode($stream['info']['artist']).'&track='.urlencode($stream['info']['song']).'&api_key='.LAST_FM_API);
-	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['track']['album']['image']){
@@ -122,7 +133,7 @@ function getTrackInfo($stream){
 //get extra information of the album
 function getAlbumInfo($stream){
 	$url = str_replace('#','', 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist='.urlencode($stream['info']['artist']).'&album='.($stream['album']['title']).'&api_key='.LAST_FM_API);
-	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 	if ($xml['album']['releasedate'] && strlen($xml['album']['releasedate']) > 10){
 		$stream['album']['releasedate'] = reset(explode(",",$xml['album']['releasedate']));
@@ -142,7 +153,7 @@ function getAlbumInfo($stream){
 //get extra information of the artist		
 function getArtistInfo($stream){
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist='.urlencode($stream['info']['artist']).'&api_key='.LAST_FM_API.'&autocorrect=1';
-	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['topalbums']['album']){
@@ -152,7 +163,7 @@ function getArtistInfo($stream){
 	}
 	
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist='.urlencode($stream['info']['artist']).'&api_key='.LAST_FM_API.'&autocorrect=1';
-	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['artist']['bio']['summary']){
@@ -165,7 +176,7 @@ function getArtistInfo($stream){
 //get buylink	
 function getTrackBuyLink($stream){
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=track.getbuylinks&artist='.urlencode($stream['info']['artist']).'&track='.urlencode($stream['info']['song']).'&api_key='.LAST_FM_API.'&country='.urlencode('GB').'&autocorrect=1';
-	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['affiliations']['physicals']['affiliation']){
@@ -197,7 +208,7 @@ function getTrackBuyLink($stream){
 
 function getAlbumBuyLink($stream){
 	$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getbuylinks&artist='.urlencode($stream['info']['artist']).'&album='.urlencode($stream['album']['title']).'&api_key='.LAST_FM_API.'&country='.urlencode('GB').'&autocorrect=1';
-	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['affiliations']['physicals']['affiliation']){
@@ -241,7 +252,7 @@ function cacheAlbumArt($image_url){
 //get lyrics from chartlyrics.com's API
 function getLyric($artist, $song){
 	$url = str_replace('\'','','http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist='.urlencode($artist).'&song='.urlencode($song));
-	$xml = simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
+	$xml = @simplexml_load_file($url,'SimpleXMLElement', LIBXML_NOCDATA);
 	$xml = obj_to_array($xml);
 //	print_r($xml);
 	if($xml['LyricId'] && ($xml['Lyric'] != array())){
@@ -311,7 +322,7 @@ function array_decode($array){
 
 function cacheVar($stream){
 	$stream = array_encode($stream);
-	file_put_contents('info.json', json_encode($stream, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+  file_put_contents(dirname(__FILE__).'/info.json', json_encode($stream));
 }
 
 function cacheHistory($stream){
@@ -321,16 +332,16 @@ function cacheHistory($stream){
 	$year = date('Y');
 	$month = date('m');
 	$day = date('d');
-	if(!is_dir('history')){
-		mkdir('history', 0775);
+	if(!is_dir(dirname(__FILE__).'/history')){
+		mkdir(dirname(__FILE__).'/history', 0775);
 	}
-	if(!is_dir('history/'.$year)){
-		mkdir('history/'.$year, 0775);
+	if(!is_dir(dirname(__FILE__).'/history/'.$year)){
+		mkdir(dirname(__FILE__).'/history/'.$year, 0775);
 	}
-	if(!is_dir('history/'.$year.'/'.$month)){
-		mkdir('history/'.$year.'/'.$month, 0775);
+	if(!is_dir(dirname(__FILE__).'/history/'.$year.'/'.$month)){
+		mkdir(dirname(__FILE__).'/history/'.$year.'/'.$month, 0775);
 	}
-	$file = 'history/'.$year.'/'.$month.'/'.$day.'.json';
+	$file = dirname(__FILE__).'/history/'.$year.'/'.$month.'/'.$day.'.json';
 	$history['time'] = date("G:i");
 	$history['song'] = $stream['info']['song'];
 	$history['song_url'] = $stream['track']['lastfm_url'];
@@ -353,19 +364,7 @@ function cacheHistory($stream){
 		file_put_contents($file, json_encode($out));
 	}
 	else file_put_contents($file, json_encode($history));
-	//createHistory();
 }
-
-function createHistory(){
-	$history = json_decode(file_get_contents('history.json'), TRUE);
-	$year = date('Y');
-	$month = date('m');
-	$day = date('d');
-	$history[$year][$month][$day] = $year.$month.$day;
-	$file = 'history/'.$year.'/'.$month.'/'.$day.'.json';
-	file_put_contents('history.json', json_encode($history));
-}
-
 
 function init($stream){
 	$stream['album']['image_s'] = $stream['album']['image_m'] = $stream['album']['image_l'] = $stream['album']['image_xl'] = DEFAULT_ALBUM_ART;
