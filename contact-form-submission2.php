@@ -21,8 +21,8 @@ if (isset($error)) {
     header('Location: contact.php?e='.urlencode($error)); exit;
 }
 
-$headers = "From: $email_address\r\n"; 
-$headers .= "Reply-To: $email_address\r\n";
+$headers = "From: app@chainefm.com\r\n"; 
+$headers .= "Reply-To: app@chainefm.com\r\n";
 
 // write the email content
 $email_content = "Name: $name\n";
@@ -30,7 +30,7 @@ $email_content .= "Message:\n\n$message";
 	
 // send the email
 //ENTER YOUR INFORMATION BELOW FOR THE FORM TO WORK!
-mail ('android@chainefm.com', 'Chaine FM - Contact Form Submission', $email_content, $headers);
+mail ('studio@chainefm.com', 'Chaine FM - Contact Form Submission', $email_content, $headers);
 	
 // send the user back to the form
 header('Location: contact2?s='.urlencode('Thank you for your message.')); exit;
