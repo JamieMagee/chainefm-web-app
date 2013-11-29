@@ -1,6 +1,7 @@
 <?php
 require('config.php');
 $stream = getStreamInfo();
+//print_r(dirname(__FILE__));
 if($stream['info']['status'] == 'OFF AIR'){
 	cacheVar($stream);
 }
@@ -38,19 +39,6 @@ function obj_to_array($obj){
 }
 
 function getStreamInfo(){
-	
-	//Shoutcast
-	// $options = array(
-	  // 'http'=>array(
-		// 'method'=>"GET",
-		// 'header'=>"Accept-language: en\r\n" .
-				  // "Cookie: foo=bar\r\n" .  // check function.stream-context-create on php.net
-				  // "User-Agent: Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B334b Safari/531.21.102011-10-16 20:23:10\r\n" // i.e. An iPad 
-	  // )
-	// );
-
-	// $context = stream_context_create($options);
-	// $str = file_get_contents(SERVER.'/'.MOUNT,false, $context);
   
   $curl_handle=curl_init();
   curl_setopt($curl_handle, CURLOPT_URL, SERVER.'/'.MOUNT);
@@ -59,44 +47,41 @@ function getStreamInfo(){
   curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Mozilla');
   $str = curl_exec($curl_handle);
   curl_close($curl_handle);
-  
-  //print_r($str);
-  
-	if(preg_match_all('/<b>(.*)<\/b>/isU', $str, $match)){
-		$stream['info']['status'] = 'ON AIR';
-		$stream['info']['title'] = $match[1][4]; 
-		//$stream['info']['description'] = $match[1][1]; 
-		$stream['info']['type'] = $match[1][5]; 
-		$stream['info']['start'] = $match[1][3]; 
-		//$stream['info']['bitrate'] = $match[1][3]; 
-		//$stream['info']['listeners'] = $match[1][4]; 
-		//$stream['info']['msx_listeners'] = $match[1][5]; 
-		$stream['info']['genre'] = $match[1][6]; 
-		$stream['info']['stream_url'] = $match[1][7];
-		$stream['info']['artist_song'] = $match[1][10];
-			$x = explode(" - ",$match[1][10]); 
-			$y = explode("(",$x[1]);
-		$stream['info']['artist'] = $x[0]; 
-		$stream['info']['song'] = $y[0];
-	}
-	// Icecast
-	// $str = file_get_contents(SERVER.'/status.xsl?mount='.MOUNT);
-	// if(preg_match_all('/<td\s[^>]*class=\"streamdata\">(.*)<\/td>/isU', $str, $match)){
+    
+  //Shoutcast
+	// if(preg_match_all('/<b>(.*)<\/b>/isU', $str, $match)){
 		// $stream['info']['status'] = 'ON AIR';
-		// $stream['info']['title'] = $match[1][0]; 
-		// //$stream['info']['description'] = $match[1][1]; 
-		// $stream['info']['type'] = $match[1][1]; 
-		// $stream['info']['start'] = $match[1][2]; 
-		// $stream['info']['bitrate'] = $match[1][3]; 
-		// $stream['info']['listeners'] = $match[1][4]; 
-		// $stream['info']['msx_listeners'] = $match[1][5]; 
+		// $stream['info']['title'] = $match[1][4]; 
+		// $stream['info']['type'] = $match[1][5]; 
+		// $stream['info']['start'] = $match[1][3]; 
 		// $stream['info']['genre'] = $match[1][6]; 
 		// $stream['info']['stream_url'] = $match[1][7];
-		// $stream['info']['artist_song'] = $match[1][8];
-			// $x = explode(" - ",$match[1][8]); 
+		// $stream['info']['artist_song'] = $match[1][10];
+			// $x = explode(" - ",$match[1][10]); 
+			// $y = explode("(",$x[1]);
 		// $stream['info']['artist'] = $x[0]; 
-		// $stream['info']['song'] = $x[1];
+		// $stream['info']['song'] = $y[0];
 	// }
+  
+	// Icecast
+  
+	if(preg_match_all('/<td\s[^>]*class=\"streamdata\">(.*)<\/td>/isU', $str, $match)){
+		$stream['info']['status'] = 'ON AIR';
+		$stream['info']['title'] = $match[1][0]; 
+		$stream['info']['description'] = $match[1][1]; 
+		$stream['info']['type'] = $match[1][2]; 
+		$stream['info']['start'] = $match[1][3]; 
+		//$stream['info']['bitrate'] = $match[1][4]; 
+		$stream['info']['listeners'] = $match[1][4]; 
+		$stream['info']['max_listeners'] = $match[1][5]; 
+		$stream['info']['genre'] = $match[1][6]; 
+		//$stream['info']['stream_url'] = $match[1][8];
+		$stream['info']['artist_song'] = $match[1][7];
+			$x = explode(" by ",$match[1][7]);
+      $x[1] = rtrim($x[1], ".");
+		$stream['info']['artist'] = $x[1]; 
+		$stream['info']['song'] = $x[0];
+	}
 	else{
 		$stream['info']['status'] = 'OFF AIR';
 	}
