@@ -101,14 +101,14 @@ function getOnAir() {
       if (curHour < trimmedTimes[i]) {
         $('.panel-title').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')' + " ", data).find("td").eq(1).text());
         //$('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
-        $('.panel-title').append(' <small>with <a target="_blank" href="presenters#collapse' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text().replace(/\s/g, "")+'">'+$(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text()+'</a></small>');
+        $('.panel-title').append(' <small>with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).html()+'</small>');
         $('.panel-body').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(3).text());
         $('.panel-footer').html('Sponsored by '+$(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(4).html());
         break;
       } else if (i == trimmedTimes.length) {
         $('.panel-title').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')' + " ", data).find("td").eq(1).text());
         //$('.align-right').text('(' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(0).text() + ')');
-        $('.panel-title').append(' <small>with <a target="_blank" href="presenters#collapse' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text().replace(/\s/g, "")+'">'+$(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).text()+'</a></small>');
+        $('.panel-title').append(' <small>with ' + $(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(2).html()+'</small>');
         $('.panel-body').text($(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(3).text());
         $('.panel-footer').html('Sponsored by '+$(weekDay[day] + 'Table>tbody>tr:nth-child(' + i + ')', data).find("td").eq(4).html());
       }
