@@ -3,10 +3,10 @@ $(document).ready(function () {
 	var i = 0;
   var agent = navigator.userAgent;
   
-  if (agent.match(/(iPhone|iPod|iPad)/)) var separator = ';'
-  else var separator = '?'
+  if (agent.match(/(iPhone|iPod|iPad)/)) var separator = ';';
+  else var separator = '?';
 	
-	$('#facebook-btn').popover()
+	$('#facebook-btn').popover();
 	$('#message-btn').focus();
 
 	$("#sms-btn").click(function () {
@@ -20,18 +20,18 @@ $(document).ready(function () {
 	});
 
 	$("#twitter-btn").click(function () {
-		var uri = "https://twitter.com/intent/tweet?text=@ChaineFM "
+		var uri = "https://twitter.com/intent/tweet?text=@ChaineFM ";
 		cleanUp(uri);		
 	});
 
 	$("#facebook-btn").click(function () {
 		if (i != 0) {
-			$('#facebook-btn').popover()
+			$('#facebook-btn').popover();
 			$('#message').val('');
 			i = 0;
 			window.open("https://facebook.com/chainefm");
 		} else {
-			$('#facebook-btn').popover()
+			$('#facebook-btn').popover();
 			$('#message').select();
 			i++;
 		}

@@ -1,6 +1,6 @@
 $(document).ready(function () {
   
-  var currentDate = new Date()
+  var currentDate = new Date();
   
   getHistory(currentDate.getFullYear(), ("0"+parseInt(currentDate.getMonth()+1,10)).slice(-2), ("0"+currentDate.getDate()).slice(-2));
   
@@ -9,7 +9,7 @@ $(document).ready(function () {
     format: "DD/MM/YYYY",
     endDate: ("0"+parseInt(currentDate.getMonth()+1,10)).slice(-2)+'/'+("0"+currentDate.getDate()).slice(-2)+'/'+currentDate.getFullYear(),
     icons: {    
-      date: "fa fa-calendar",
+      date: "fa fa-calendar"
     }
   });
   

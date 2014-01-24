@@ -1,3 +1,4 @@
 icecast-stats/*.json
 icecast-stats/*.txt
 icecast-stats/history/*
+.idea

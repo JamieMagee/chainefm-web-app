@@ -81,7 +81,7 @@ $(document).ready(function () {
 function getOnAir() {
   $.get("schedule.html", function (data) {
 
-    var weekDay = new Array('#sunday', '#monday', '#tuesday', '#wednesday', '#thursday', '#friday', '#saturday');
+    var weekDay = ['#sunday', '#monday', '#tuesday', '#wednesday', '#thursday', '#friday', '#saturday'];
     var day = new Date().getDay();
     var curHour = new Date().getHours();
     var trimmedTimes = [];
